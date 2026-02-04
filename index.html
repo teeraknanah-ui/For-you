@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: #fff0f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.container {
+  text-align: center;
+  max-width: 90%;
+}
+
+.fade {
+  animation: fadeOut 3s forwards;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; display: none; }
+}
+
+img {
+  width: 260px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 2em;
+  color: #e91e63;
+}
+
+.buttons {
+  margin-top: 25px;
+  position: relative;
+  height: 120px;
+}
+
+button {
+  font-size: 1.2em;
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+}
+
+#yes {
+  background: #e91e63;
+  color: white;
+}
+
+#no {
+  background: #ffd1dc;
+  color: #e91e63;
+  position: absolute;
+  left: 60%;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="stage1">
+  <!-- Replace this image with chibi/manhwa couple -->
+  <img src="https://i.imgur.com/8QfZK5k.png" alt="chibi couple">
+</div>
+
+<div class="container" id="stage2" style="display:none;">
+  <h1>Will you be my Valentine?</h1>
+
+  <div class="buttons">
+    <button id="yes">YES</button>
+    <button id="no">NO</button>
+  </div>
+</div>
+
+<script>
+setTimeout(() => {
+  document.getElementById("stage1").style.display = "none";
+  document.getElementById("stage2").style.display = "block";
+}, 3000);
+
+let noCount = 0;
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const stage2 = document.getElementById("stage2");
+
+noBtn.addEventListener("click", () => {
+  noCount++;
+
+  if (noCount <= 3) {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 100);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  } else {
+    stage2.innerHTML = `
+      <h1>NO button is invalid</h1>
+      <h1>Your rejection has been rejected</h1>
+      <button id="yesAgain">YES</button>
+    `;
+
+    document.getElementById("yesAgain").onclick = finalYes;
+  }
+});
+
+yesBtn.addEventListener("click", finalYes);
+
+function finalYes() {
+  stage2.innerHTML = `
+    <h1>हमारा वैलेंटाइन बनने के लिए शुक्रिया</h1>
+    <!-- Replace with Shinchan heart pose image -->
+    <img src="https://i.imgur.com/1qXK7YF.png" alt="shinchan">
+  `;
+}
+</script>
+
+</body>
+</html>
